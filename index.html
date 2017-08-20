@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+  <meta charset="UTF-8">
+  <title>create.js</title>
+  <script src="lib/easeljs-0.8.2.min.js"></script>
+</head>
+<body>
+</body>
+<script>
+  init ()
+  function component() {
+    var element = document.createElement('canvas');
+    element.setAttribute('id', 'demoCanvas')
+    element.setAttribute('width', '500')
+    element.setAttribute('height', '500')
+    return element
+  }
+  function init() {
+    document.body.appendChild(component())
+    var stage = new createjs.Stage("demoCanvas");
+    var circle = new createjs.Shape();
+    circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
+    circle.x = 100;
+    circle.y = 100;
+    stage.addChild(circle);
+    setTimeout(function () {
+      circle.x = 200;
+      console.log(circle)
+    }, 100)
+    createjs.Ticker.setFPS(60);
+    createjs.Ticker.addEventListener("tick", function () {
+      stage.update();
+    });
+  }
+</script>
+</html>
