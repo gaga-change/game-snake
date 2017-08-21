@@ -2,27 +2,23 @@ var UP = 1
 var DOWN = -1
 var LEFT = 2
 var RIGHT = -2
+var Direction = DOWN
 
 function init() {
-  var snakes = [new Point(_padding().w / 2, _padding().h / 2),
-    new Point(_gridW() + _padding().w / 2, _padding().h / 2)]
+  var snakes = _initSnake()
   document.getElementById('app').appendChild(createCanvas())
   var stage = new createjs.Stage("demoCanvas");
   var grid = new createjs.Shape();
   var snake = new createjs.Shape();
   drawGrid(grid.graphics)
-  // drawSnake(snake.graphics, snakes)
   stage.addChild(grid);
   stage.addChild(snake);
   createjs.Ticker.setFPS(60);
   createjs.Ticker.addEventListener("tick", function () {
     stage.update();
   });
+  //
   move(snake.graphics, snakes)
-  // setTimeout(function () {
-  //   snakes.push(new Point(_gridW(), _gridW()))
-  //   drawSnake(snake.graphics, snakes)
-  // }, 1000)
 }
 
 var test = 0
@@ -31,10 +27,10 @@ function move(graphics, snakes) {
   _run()
 
   function _run() {
-    updateSnake(snakes, DOWN)
+    updateSnake(snakes, Direction)
     drawSnake(graphics, snakes)
     test++
-    if (test > 10) return
+    if (test > 100) return
     setTimeout(_run, 1000)
   }
 }
@@ -47,6 +43,11 @@ function updateSnake(snakes, direction) {
   snakes.push(p)
 }
 
+/**
+ * 绘制蛇
+ * @param graphics
+ * @param snakes // 蛇坐标
+ */
 function drawSnake(graphics, snakes) {
   console.log('drawSnake')
   graphics.clear()
@@ -56,6 +57,15 @@ function drawSnake(graphics, snakes) {
   }
 }
 
+/**
+ * 改变蛇行进方向
+ * @param dir
+ */
+function changeDirection(dir) {
+  /* 逆向及同向则不改变 */
+  if (Direction + dir === 0 || Direction === dir) return
+  Direction = dir
+}
 
 /**
  * 绘制格子地图
@@ -93,6 +103,16 @@ function createCanvas() {
   element.setAttribute('width', String(w))
   element.setAttribute('height', String(h))
   return element
+}
+
+function _initSnake() {
+  return [
+    new Point(_padding().w / 2, _padding().h / 2),
+    new Point(_gridW() + _padding().w / 2, _padding().h / 2),
+    new Point(_gridW() * 2 + _padding().w / 2, _padding().h / 2),
+    new Point(_gridW() * 3 + _padding().w / 2, _padding().h / 2),
+    new Point(_gridW() * 4 + _padding().w / 2, _padding().h / 2),
+  ]
 }
 
 /**
