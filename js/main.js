@@ -1,22 +1,25 @@
+/* 全局变量-四个方向 */
 var UP = 1
 var DOWN = -1
 var LEFT = 2
 var RIGHT = -2
-var Direction = DOWN
+/* 蛇移动的方向 */
+var Direction = null
 
 function init() {
-  var snakes = _initSnake()
-  document.getElementById('app').appendChild(createCanvas())
-  var stage = new createjs.Stage("demoCanvas");
-  var grid = new createjs.Shape();
-  var snake = new createjs.Shape();
+  var snakes = _initSnake() // 初始化蛇的坐标
+  Direction = DOWN // 初始化蛇的移动方向
+  document.getElementById('app').appendChild(createCanvas()) // 创建画布
+  var stage = new createjs.Stage("demoCanvas")
+  var grid = new createjs.Shape()
+  var snake = new createjs.Shape()
   drawGrid(grid.graphics)
-  stage.addChild(grid);
-  stage.addChild(snake);
-  createjs.Ticker.setFPS(60);
+  stage.addChild(grid)
+  stage.addChild(snake)
+  createjs.Ticker.setFPS(60)
   createjs.Ticker.addEventListener("tick", function () {
-    stage.update();
-  });
+    stage.update()
+  })
   //
   move(snake.graphics, snakes)
 }
@@ -105,6 +108,11 @@ function createCanvas() {
   return element
 }
 
+/**
+ * 初始化蛇的坐标
+ * @returns {[Point,Point,Point,Point,Point ...]}
+ * @private
+ */
 function _initSnake() {
   return [
     new Point(_padding().w / 2, _padding().h / 2),
