@@ -8,22 +8,25 @@ function init() {
   // circle.x = 100;
   // circle.y = 100;
   drawGrid(grid.graphics)
-  drawSnake(snake.graphics)
+  var snakes = [new Point(0, 0), new Point(_gridW(), 0)]
+  drawSnake(snake.graphics, snakes)
   stage.addChild(grid);
   stage.addChild(snake);
   setTimeout(function () {
-    // circle.x = 200;
-    // console.log(circle)
-  }, 100)
+    snakes.push(new Point(_gridW(), _gridW()))
+    drawSnake(snake.graphics, snakes)
+  }, 1000)
   createjs.Ticker.setFPS(60);
   createjs.Ticker.addEventListener("tick", function () {
     stage.update();
   });
 }
 
-function drawSnake(graphics) {
-  graphics.beginFill("DeepSkyBlue").drawRect(10, 10, 20, 20)
-  // .drawRect(10, 10, 30, 30);
+function drawSnake(graphics, snakes) {
+  graphics.beginFill("DeepSkyBlue")
+  for(var i = 0; i < snakes.length; i ++) {
+    graphics.drawRect(snakes[i].x, snakes[i].y, _gridW(), _gridW());
+  }
 }
 
 /**
