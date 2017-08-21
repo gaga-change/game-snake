@@ -1,4 +1,17 @@
 function Point(x, y) {
-  this.x = x + _padding().w / 2
-  this.y = y + _padding().h / 2
+  this.x = x
+  this.y = y
+  this.update = function (gridW, direction) {
+    switch(direction) {
+      case UP:
+        break
+      case DOWN:
+        this.y += gridW
+        break
+      case LEFT:
+        break
+      case RIGHT:
+        break
+    }
+  }
 }

@@ -1,5 +1,11 @@
+var UP = 1
+var DOWN = -1
+var LEFT = 2
+var RIGHT = -2
+
 function init() {
-  var snakes = [new Point(0, 0), new Point(_gridW(), 0)]
+  var snakes = [new Point(_padding().w / 2, _padding().h / 2),
+    new Point(_gridW() + _padding().w / 2, _padding().h / 2)]
   document.getElementById('app').appendChild(createCanvas())
   var stage = new createjs.Stage("demoCanvas");
   var grid = new createjs.Shape();
@@ -23,9 +29,9 @@ var test = 0
 
 function move(graphics, snakes) {
   _run()
+
   function _run() {
-    if (test > 2)
-    snakes.push(new Point(_gridW(), _gridW()))
+    updateSnake(snakes, DOWN)
     drawSnake(graphics, snakes)
     test++
     if (test > 10) return
@@ -33,13 +39,23 @@ function move(graphics, snakes) {
   }
 }
 
+function updateSnake(snakes, direction) {
+  snakes.shift()
+  var oldHead = snakes[snakes.length - 1]
+  var p = new Point(oldHead.x, oldHead.y)
+  p.update(_gridW(), direction)
+  snakes.push(p)
+}
+
 function drawSnake(graphics, snakes) {
   console.log('drawSnake')
+  graphics.clear()
   graphics.beginFill("DeepSkyBlue")
   for (var i = 0; i < snakes.length; i++) {
     graphics.drawRect(snakes[i].x, snakes[i].y, _gridW(), _gridW());
   }
 }
+
 
 /**
  * 绘制格子地图
@@ -98,10 +114,6 @@ function _num() {
     w: Math.floor(_w() / _gridW()),
     h: Math.floor(_h() / _gridW())
   }
-}
-
-function _snake() {
-
 }
 
 /**
