@@ -2,18 +2,18 @@ function Point(x, y) {
   this.x = x
   this.y = y
   this.update = function (gridW, direction) {
-    switch(direction) {
+    switch (direction) {
       case UP:
-        this.y -= gridW
+        this.y -= 1
         break
       case DOWN:
-        this.y += gridW
+        this.y += 1
         break
       case LEFT:
-        this.x -= gridW
+        this.x -= 1
         break
       case RIGHT:
-        this.x += gridW
+        this.x += 1
         break
     }
   }

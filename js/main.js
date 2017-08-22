@@ -56,7 +56,10 @@ function drawSnake(graphics, snakes) {
   graphics.clear()
   graphics.beginFill("DeepSkyBlue")
   for (var i = 0; i < snakes.length; i++) {
-    graphics.drawRect(snakes[i].x, snakes[i].y, _gridW(), _gridW());
+    graphics.drawRect(
+      snakes[i].x * _gridW() + _padding().w / 2,
+      snakes[i].y * _gridW() + _padding().h / 3,
+      _gridW(), _gridW());
   }
 }
 
@@ -115,11 +118,10 @@ function createCanvas() {
  */
 function _initSnake() {
   return [
-    new Point(_padding().w / 2, _padding().h / 2),
-    new Point(_gridW() + _padding().w / 2, _padding().h / 2),
-    new Point(_gridW() * 2 + _padding().w / 2, _padding().h / 2),
-    new Point(_gridW() * 3 + _padding().w / 2, _padding().h / 2),
-    new Point(_gridW() * 4 + _padding().w / 2, _padding().h / 2),
+    new Point(0, 0),
+    new Point(1, 0),
+    new Point(2, 0),
+    new Point(3, 0)
   ]
 }
 
