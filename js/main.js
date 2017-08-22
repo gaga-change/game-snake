@@ -10,7 +10,6 @@ var PLAYING = 3 // 游戏中
 /* 蛇移动的方向 */
 var DirectionOld = null
 var DirectionNew = null
-var StopChangeDirection = false
 /* 游戏状态 */
 var GameState = null
 
@@ -28,11 +27,15 @@ function init() {
   createjs.Ticker.addEventListener("tick", function () {
     stage.update()
   })
-  //
   GameState = READY // 准备流程结束
   move(snake.graphics, snakes)
 }
 
+/**
+ * 跑动引擎
+ * @param graphics
+ * @param snakes
+ */
 function move(graphics, snakes) {
   _run()
 
@@ -45,6 +48,11 @@ function move(graphics, snakes) {
   }
 }
 
+/**
+ * 改变蛇身坐标
+ * @param snakes
+ * @param direction
+ */
 function updateSnake(snakes, direction) {
   var oldHead = snakes[snakes.length - 1]
   var p = new Point(oldHead.x, oldHead.y)
@@ -152,10 +160,6 @@ function _initSnake() {
     new Point(1, 0),
     new Point(2, 0),
     new Point(3, 0),
-    new Point(4, 0),
-    new Point(5, 0),
-    new Point(6, 0),
-    new Point(7, 0),
   ]
 }
 
