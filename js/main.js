@@ -14,7 +14,7 @@ var GameState = null
 var Scope = null
 
 function init() {
-  Scope = 0
+  updateScope(0) // 初始化分数
   var snakes = _initSnake() // 初始化蛇的坐标
   var fruits = []
   fruits.push(createFruit(snakes, fruits)) // 初始化水果坐标，默认是两个
@@ -47,6 +47,7 @@ function init() {
 function move(graphics, snakes, fruits) {
   clearTimeout(window.engine) // 重启时关停之前的引擎
   _run()
+
   function _run() {
     DirectionOld = DirectionNew
     fruits = updateSnake(snakes, DirectionOld, fruits) || fruits
@@ -140,8 +141,10 @@ function updateSnake(snakes, direction, fruits) {
 /**
  * 更新页面中显示的分数
  */
-function updateScope() {
-  Scope ++
+function updateScope(num) {
+  if (num !== undefined) Scope = 0
+  else
+    Scope++
   document.getElementById('scope').innerText = String(Scope)
 }
 
@@ -270,8 +273,7 @@ function _padding() {
  * @private
  */
 function _h() {
-  // return Math.floor(window.screen.height * 0.8)
-  return Math.floor(document.body.scrollHeight  * 0.8)
+  return Math.floor(document.body.scrollHeight * 0.8)
 }
 
 /**
@@ -280,5 +282,5 @@ function _h() {
  * @private
  */
 function _w() {
-  return Math.min(window.screen.width, 768)
+  return Math.min(document.body.scrollWidth, 768)
 }
