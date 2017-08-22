@@ -16,6 +16,9 @@
     <div class="btn">
       <button onclick="changeDirection(UP)">上</button>
     </div>
+    <div class="scope">
+      分数：<span id="scope">0</span>
+    </div>
   </div>
   <div class="row clearfix">
     <div class="btn half-width left">
@@ -31,7 +34,7 @@
     </div>
   </div>
 </div>
-<div class="menu" id="menu" style="display: block">
+<div class="menu" id="menu" style="display: none">
   <h1>贪吃蛇</h1>
   <div class="btn">
     <button type="button" onclick="start()">开始</button>
@@ -42,12 +45,13 @@
 <script src="js/pointClass.js"></script>
 <script src="js/main.js"></script>
 <script>
+  init()
   function start() {
     document.getElementById('menu').style.display = 'none'
     init()
   }
   function end() {
-    document.getElementById('menu').style.display = 'block'
+//    document.getElementById('menu').style.display = 'block'
   }
 </script>
 </html>

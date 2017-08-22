@@ -12,6 +12,7 @@ var DirectionOld = null
 var DirectionNew = null
 /* 游戏状态 */
 var GameState = null
+var Scope = 0
 
 function init() {
   var snakes = _initSnake() // 初始化蛇的坐标
@@ -129,8 +130,18 @@ function updateSnake(snakes, direction, fruits) {
     snakes.pop() // 删除新添的头部
     GameState = END
   }
-  if (fruits.length < 2) // 如果水果没有减少则不更新现有的水果坐标数组
+  if (fruits.length < 2) { // 如果水果没有减少则不更新现有的水果坐标数组
+    updateScope()
     return fruits
+  }
+}
+
+/**
+ * 更新页面中显示的分数
+ */
+function updateScope() {
+  Scope ++
+  document.getElementById('scope').innerText = Scope
 }
 
 /**
