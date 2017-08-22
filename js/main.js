@@ -39,9 +39,10 @@ function init() {
 }
 
 /**
- * 跑动引擎
+ * 引擎
  * @param graphics
  * @param snakes
+ * @param fruits
  */
 function move(graphics, snakes, fruits) {
   clearTimeout(window.engine) // 重启时关停之前的引擎
@@ -141,7 +142,7 @@ function updateSnake(snakes, direction, fruits) {
  */
 function updateScope() {
   Scope ++
-  document.getElementById('scope').innerText = Scope
+  document.getElementById('scope').innerText = String(Scope)
 }
 
 /**
@@ -226,7 +227,7 @@ function _initSnake() {
     new Point(0, 0),
     new Point(1, 0),
     new Point(2, 0),
-    new Point(3, 0),
+    new Point(3, 0)
   ]
 }
 
