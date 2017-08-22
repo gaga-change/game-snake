@@ -44,16 +44,17 @@ function init() {
  */
 function move(graphics, snakes, fruits) {
   _run()
+
   function _run() {
     DirectionOld = DirectionNew
-    updateSnake(snakes, DirectionOld)
+    fruits = updateSnake(snakes, DirectionOld, fruits) || fruits
     if (GameState === END) return
-    if (fruits.length < 2){
+    if (fruits.length < 2) {
       fruits.push(createFruit(snakes, fruits))
-      drawFruit(graphics.fruit, fruit)
+      drawFruit(graphics.fruit, fruits)
     }
     drawSnake(graphics.snake, snakes)
-    setTimeout(_run, 1000)
+    setTimeout(_run, 300)
   }
 }
 
@@ -84,10 +85,11 @@ function createFruit(snakes, fruits) {
 
 /**
  * 改变蛇身坐标
- * @param snakes
- * @param direction
+ * @param snakes 蛇坐标集
+ * @param direction 方向
+ * @param fruits 水果坐标集
  */
-function updateSnake(snakes, direction) {
+function updateSnake(snakes, direction, fruits) {
   var oldHead = snakes[snakes.length - 1]
   var p = new Point(oldHead.x, oldHead.y)
   p.update(_gridW(), direction)
@@ -96,7 +98,13 @@ function updateSnake(snakes, direction) {
     GameState = END
     return
   }
-  var shiftPoint = snakes.shift()
+  fruits = fruits.filter(function (point) {
+    return !(point.x === p.x && point.y === p.y)
+  })
+  var shiftPoint = null
+  console.log(fruits.length)
+  if (fruits.length === 2) // 没有吃到水果才消除尾巴
+    shiftPoint = snakes.shift()
   snakes.push(p)
   // ‘吃’到自己 游戏结束
   if (snakes.some(function (p1, index1) {
@@ -104,11 +112,12 @@ function updateSnake(snakes, direction) {
         return p2.x === p1.x && p2.y === p1.y && index1 !== index2
       })
     })) {
-    snakes.unshift(shiftPoint) // 还原被删掉的末尾
+    if (fruits.length === 2) snakes.unshift(shiftPoint) // 还原被删掉的末尾
     snakes.pop() // 删除新添的头部
     GameState = END
-    return
   }
+  if (fruits.length < 2) // 如果水果没有减少则不更新现有的水果坐标数组
+    return fruits
 }
 
 /**
