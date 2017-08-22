@@ -4,26 +4,39 @@
   <meta charset="UTF-8">
   <title>create.js</title>
   <link rel="stylesheet" href="css/stylesheet.css">
-  <link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" rel="stylesheet">
-  <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
 
 </head>
 <body>
 <div id="app">
 
 </div>
-<div style="position: fixed; bottom: 0">
-  <button onclick="changeDirection(UP)">上</button>
-  <button onclick="changeDirection(DOWN)">下</button>
-  <button onclick="changeDirection(LEFT)">左</button>
-  <button onclick="changeDirection(RIGHT)">右</button>
+<div class="control">
+  <div class="row">
+    <div class="btn">
+      <button onclick="changeDirection(UP)">上</button>
+    </div>
+  </div>
+  <div class="row clearfix">
+    <div class="btn half-width left">
+      <button onclick="changeDirection(LEFT)">左</button>
+    </div>
+    <div class="btn half-width right">
+      <button onclick="changeDirection(RIGHT)">右</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="btn">
+      <button onclick="changeDirection(DOWN)">下</button>
+    </div>
+  </div>
 </div>
 </body>
 <script src="lib/easeljs-0.8.2.min.js"></script>
 <script src="js/pointClass.js"></script>
 <script src="js/main.js"></script>
 <script>
-  init()
+    init()
 </script>
 </html>

@@ -9,3 +9,47 @@
     position: fixed;
     overflow: hidden;
 }
+
+.control {
+    position: fixed;
+    width: 100%;
+    height: 20%;
+    bottom: 0;
+    background-color: #aeff5d;
+}
+.control .row {
+    height: 33%;
+    text-align: center;
+}
+.control .btn {
+    box-sizing: border-box;
+    height: 100%;
+    padding: 4px;
+}
+.control button {
+    display: inline-block;
+    height: 100%;
+    background-color: white;
+    border: none;
+    padding: 3px 20px;
+    border-radius: 3px;
+}
+.half-width {
+    width: 50%;
+}
+.btn.left {
+    padding-right: 20px;
+    float: left;
+    text-align: right;
+}
+.btn.right {
+    padding-left: 20px;
+    float: right;
+    text-align: left;
+}
+
+.clearfix:after {
+    content: '';
+    display: block;
+    clear: both;
+}
