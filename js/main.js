@@ -112,11 +112,16 @@ function drawGrid(graphics) {
   graphics.setStrokeStyle(.1).beginStroke('#ffac52')
   /* 横向 */
   for (var i = 0; i <= hNum; i++) {
+    if (i === hNum || i === 0) graphics.setStrokeStyle(1)
+    if (i === 1) graphics.setStrokeStyle(.1)
     graphics.moveTo(paddingW / 2, i * w + paddingH / 2)
     .lineTo(_w() - paddingW / 2, i * w + paddingH / 2)
   }
+  graphics.setStrokeStyle(.1)
   /* 纵向 */
   for (i = 0; i <= wNum; i++) {
+    if (i === wNum || i === 0) graphics.setStrokeStyle(1)
+    if (i === 1) graphics.setStrokeStyle(.1)
     graphics.moveTo(i * w + paddingW / 2, paddingH / 2)
     .lineTo(i * w + paddingW / 2, gridW * hNum + paddingH / 2)
   }
