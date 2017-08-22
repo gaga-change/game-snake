@@ -20,7 +20,8 @@ function init() {
   fruits.push(createFruit(snakes, fruits)) // 初始化水果坐标，默认是两个
   fruits.push(createFruit(snakes, fruits))
   DirectionOld = DirectionNew = DOWN // 初始化蛇的移动方向
-  document.getElementById('app').appendChild(createCanvas()) // 创建画布
+  document.getElementById('content-canvas').innerHTML = ''
+  document.getElementById('content-canvas').appendChild(createCanvas()) // 创建画布
   var stage = new createjs.Stage("demoCanvas")
   var grid = new createjs.Shape()
   var snake = new createjs.Shape()
