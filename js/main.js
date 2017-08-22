@@ -43,8 +43,8 @@ function init() {
  * @param snakes
  */
 function move(graphics, snakes, fruits) {
+  clearTimeout(window.engine) // 重启时关停之前的引擎
   _run()
-
   function _run() {
     DirectionOld = DirectionNew
     fruits = updateSnake(snakes, DirectionOld, fruits) || fruits
@@ -54,10 +54,15 @@ function move(graphics, snakes, fruits) {
       drawFruit(graphics.fruit, fruits)
     }
     drawSnake(graphics.snake, snakes)
-    setTimeout(_run, 300)
+    window.engine = setTimeout(_run, 300)
   }
 }
 
+/**
+ * 绘制水果
+ * @param graphics
+ * @param fruits 水果坐标集
+ */
 function drawFruit(graphics, fruits) {
   graphics.clear()
   graphics.beginFill("#16ff16")
@@ -69,6 +74,12 @@ function drawFruit(graphics, fruits) {
   }
 }
 
+/**
+ * 创建水果坐标
+ * @returns Point
+ * @param snakes
+ * @param fruits
+ */
 function createFruit(snakes, fruits) {
   return (function _createPoint() {
     var p = new Point(Math.floor(Math.random() * _num().w), Math.floor(Math.random() * _num().h))
@@ -102,7 +113,6 @@ function updateSnake(snakes, direction, fruits) {
     return !(point.x === p.x && point.y === p.y)
   })
   var shiftPoint = null
-  console.log(fruits.length)
   if (fruits.length === 2) // 没有吃到水果才消除尾巴
     shiftPoint = snakes.shift()
   snakes.push(p)
