@@ -15,20 +15,26 @@ var GameState = null
 
 function init() {
   var snakes = _initSnake() // 初始化蛇的坐标
+  var fruits = []
+  fruits.push(createFruit(snakes, fruits)) // 初始化水果坐标，默认是两个
+  fruits.push(createFruit(snakes, fruits))
   DirectionOld = DirectionNew = DOWN // 初始化蛇的移动方向
   document.getElementById('app').appendChild(createCanvas()) // 创建画布
   var stage = new createjs.Stage("demoCanvas")
   var grid = new createjs.Shape()
   var snake = new createjs.Shape()
+  var fruit = new createjs.Shape()
   drawGrid(grid.graphics)
   stage.addChild(grid)
   stage.addChild(snake)
+  stage.addChild(fruit)
   createjs.Ticker.setFPS(60)
   createjs.Ticker.addEventListener("tick", function () {
     stage.update()
   })
   GameState = READY // 准备流程结束
-  move(snake.graphics, snakes)
+  drawFruit(fruit.graphics, fruits)
+  move({snake: snake.graphics, fruit: fruit.graphics}, snakes, fruits)
 }
 
 /**
@@ -36,16 +42,44 @@ function init() {
  * @param graphics
  * @param snakes
  */
-function move(graphics, snakes) {
+function move(graphics, snakes, fruits) {
   _run()
-
   function _run() {
     DirectionOld = DirectionNew
     updateSnake(snakes, DirectionOld)
     if (GameState === END) return
-    drawSnake(graphics, snakes)
+    if (fruits.length < 2){
+      fruits.push(createFruit(snakes, fruits))
+      drawFruit(graphics.fruit, fruit)
+    }
+    drawSnake(graphics.snake, snakes)
     setTimeout(_run, 1000)
   }
+}
+
+function drawFruit(graphics, fruits) {
+  graphics.clear()
+  graphics.beginFill("#16ff16")
+  for (var i = 0; i < fruits.length; i++) {
+    graphics.drawRect(
+      fruits[i].x * _gridW() + _padding().w / 2,
+      fruits[i].y * _gridW() + _padding().h / 2,
+      _gridW(), _gridW());
+  }
+}
+
+function createFruit(snakes, fruits) {
+  return (function _createPoint() {
+    var p = new Point(Math.floor(Math.random() * _num().w), Math.floor(Math.random() * _num().h))
+    if (snakes.some(function (point) {
+        return p.x === point.x && p.y === point.y
+      }) || fruits.some(function (point) {
+        return p.x === point.x && p.y === point.y
+      })) {
+      return _createPoint()
+    }
+    return p
+  })()
 }
 
 /**
@@ -89,7 +123,7 @@ function drawSnake(graphics, snakes) {
     if (i === snakes.length - 1) graphics.beginFill("#ff6ff9")
     graphics.drawRect(
       snakes[i].x * _gridW() + _padding().w / 2,
-      snakes[i].y * _gridW() + _padding().h / 3,
+      snakes[i].y * _gridW() + _padding().h / 2,
       _gridW(), _gridW());
   }
 }
