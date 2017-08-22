@@ -75,10 +75,10 @@ function updateSnake(snakes, direction) {
  * @param snakes // 蛇坐标
  */
 function drawSnake(graphics, snakes) {
-  console.log('drawSnake')
   graphics.clear()
-  graphics.beginFill("DeepSkyBlue")
+  graphics.beginFill("#a088ff")
   for (var i = 0; i < snakes.length; i++) {
+    if (i === snakes.length - 1) graphics.beginFill("#ff6ff9")
     graphics.drawRect(
       snakes[i].x * _gridW() + _padding().w / 2,
       snakes[i].y * _gridW() + _padding().h / 3,
@@ -109,7 +109,7 @@ function drawGrid(graphics) {
   var wNum = _num().w
   var hNum = _num().h
   var w = gridW
-  graphics.setStrokeStyle(1).beginStroke('#ffac52')
+  graphics.setStrokeStyle(.1).beginStroke('#ffac52')
   /* 横向 */
   for (var i = 0; i <= hNum; i++) {
     graphics.moveTo(paddingW / 2, i * w + paddingH / 2)
