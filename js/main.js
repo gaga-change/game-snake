@@ -48,7 +48,10 @@ function move(graphics, snakes, fruits) {
   function _run() {
     DirectionOld = DirectionNew
     fruits = updateSnake(snakes, DirectionOld, fruits) || fruits
-    if (GameState === END) return
+    if (GameState === END) {
+      end()
+      return
+    }
     if (fruits.length < 2) {
       fruits.push(createFruit(snakes, fruits))
       drawFruit(graphics.fruit, fruits)
