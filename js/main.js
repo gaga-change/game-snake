@@ -3,12 +3,20 @@ var UP = 1
 var DOWN = -1
 var LEFT = 2
 var RIGHT = -2
+/* 全局变量 - 游戏状态*/
+var END = 1 // 结束
+var READY = 2 // 准备
+var PLAYING = 3 // 游戏中
 /* 蛇移动的方向 */
-var Direction = null
+var DirectionOld = null
+var DirectionNew = null
+var StopChangeDirection = false
+/* 游戏状态 */
+var GameState = null
 
 function init() {
   var snakes = _initSnake() // 初始化蛇的坐标
-  Direction = DOWN // 初始化蛇的移动方向
+  DirectionOld = DirectionNew = DOWN // 初始化蛇的移动方向
   document.getElementById('app').appendChild(createCanvas()) // 创建画布
   var stage = new createjs.Stage("demoCanvas")
   var grid = new createjs.Shape()
@@ -21,29 +29,44 @@ function init() {
     stage.update()
   })
   //
+  GameState = READY // 准备流程结束
   move(snake.graphics, snakes)
 }
-
-var test = 0
 
 function move(graphics, snakes) {
   _run()
 
   function _run() {
-    updateSnake(snakes, Direction)
+    DirectionOld = DirectionNew
+    updateSnake(snakes, DirectionOld)
+    if (GameState === END) return
     drawSnake(graphics, snakes)
-    test++
-    if (test > 100) return
     setTimeout(_run, 1000)
   }
 }
 
 function updateSnake(snakes, direction) {
-  snakes.shift()
   var oldHead = snakes[snakes.length - 1]
   var p = new Point(oldHead.x, oldHead.y)
   p.update(_gridW(), direction)
+  // 超出边界 游戏结束
+  if (p.x < 0 || p.x >= _num().w || p.y < 0 || p.y >= _num().h) {
+    GameState = END
+    return
+  }
+  var shiftPoint = snakes.shift()
   snakes.push(p)
+  // ‘吃’到自己 游戏结束
+  if (snakes.some(function (p1, index1) {
+      return snakes.some(function (p2, index2) {
+        return p2.x === p1.x && p2.y === p1.y && index1 !== index2
+      })
+    })) {
+    snakes.unshift(shiftPoint) // 还原被删掉的末尾
+    snakes.pop() // 删除新添的头部
+    GameState = END
+    return
+  }
 }
 
 /**
@@ -69,8 +92,10 @@ function drawSnake(graphics, snakes) {
  */
 function changeDirection(dir) {
   /* 逆向及同向则不改变 */
-  if (Direction + dir === 0 || Direction === dir) return
-  Direction = dir
+  if (DirectionOld + dir === 0
+    || DirectionOld === dir
+  ) return
+  DirectionNew = dir
 }
 
 /**
@@ -121,7 +146,11 @@ function _initSnake() {
     new Point(0, 0),
     new Point(1, 0),
     new Point(2, 0),
-    new Point(3, 0)
+    new Point(3, 0),
+    new Point(4, 0),
+    new Point(5, 0),
+    new Point(6, 0),
+    new Point(7, 0),
   ]
 }
 
