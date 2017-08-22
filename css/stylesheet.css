@@ -50,6 +50,18 @@
 .control .scope span {
     color: rgba(225, 0, 0, 0.7);
 }
+.control .stop-game {
+    position: absolute;
+    padding-top: 5px;
+    padding-right: 5px;
+    top: 0;
+    right: 0;
+}
+.control .stop-game button {
+    padding: 4px 5px;
+    border: 1px solid rgba(92,158,225,0.7);
+    background-color: rgba(92, 158, 225, 0.5);
+}
 .control .row {
     position: relative;
     height: 33%;

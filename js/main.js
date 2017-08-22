@@ -6,7 +6,6 @@ var RIGHT = -2
 /* 全局变量 - 游戏状态*/
 var END = 1 // 结束
 var READY = 2 // 准备
-var PLAYING = 3 // 游戏中
 /* 蛇移动的方向 */
 var DirectionOld = null
 var DirectionNew = null
@@ -59,7 +58,7 @@ function move(graphics, snakes, fruits) {
       drawFruit(graphics.fruit, fruits)
     }
     drawSnake(graphics.snake, snakes)
-    window.engine = setTimeout(_run, 300)
+    window.engine = setTimeout(_run, 500 * Math.pow(0.9, Scope))
   }
 }
 

@@ -19,6 +19,9 @@
     <div class="scope">
       分数：<span id="scope">0</span>
     </div>
+    <div class="stop-game">
+      <button type="button" onclick="end()">结束</button>
+    </div>
   </div>
   <div class="row clearfix">
     <div class="btn half-width left">
@@ -51,7 +54,8 @@
     init()
   }
   function end() {
-//    document.getElementById('menu').style.display = 'block'
+    GameState = END
+    document.getElementById('menu').style.display = 'block'
   }
 </script>
 </html>
