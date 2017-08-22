@@ -2,29 +2,42 @@
     padding: 0;
     margin: 0;
 }
+
+#app {
+    max-width: 768px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .menu {
     position: fixed;
     width: 100%;
+    max-width: 768px;
     height: 100%;
-    background-color: rgba(10,8,8,0.59);
+    background-color: rgba(10, 8, 8, 0.59);
 }
-.menu h1{
+
+.menu h1 {
     margin-top: 40px;
     text-align: center;
     color: rgba(160, 136, 255, 0.89);
 }
+
 .menu .btn {
     margin-top: 50%;
     text-align: center;
 }
+
 .menu .btn button {
     display: inline-block;
     border: none;
     padding: 6px 30px;
     border-radius: 3px;
 }
-#app {
+
+.content-canvas {
     width: 100%;
+    max-width: 768px;
     height: 80%;
     position: fixed;
     overflow: hidden;
@@ -33,10 +46,12 @@
 .control {
     position: fixed;
     width: 100%;
+    max-width: 768px;
     height: 20%;
     bottom: 0;
     background-color: #aeff5d;
 }
+
 .control .scope {
     position: absolute;
     padding-top: 5px;
@@ -47,9 +62,11 @@
     top: 0;
     left: 0;
 }
+
 .control .scope span {
     color: rgba(225, 0, 0, 0.7);
 }
+
 .control .stop-game {
     position: absolute;
     padding-top: 5px;
@@ -57,21 +74,25 @@
     top: 0;
     right: 0;
 }
+
 .control .stop-game button {
     padding: 4px 5px;
-    border: 1px solid rgba(92,158,225,0.7);
+    border: 1px solid rgba(92, 158, 225, 0.7);
     background-color: rgba(92, 158, 225, 0.5);
 }
+
 .control .row {
     position: relative;
     height: 33%;
     text-align: center;
 }
+
 .control .btn {
     box-sizing: border-box;
     height: 100%;
     padding: 4px;
 }
+
 .control button {
     display: inline-block;
     height: 100%;
@@ -80,14 +101,17 @@
     padding: 3px 20px;
     border-radius: 3px;
 }
+
 .half-width {
     width: 50%;
 }
+
 .btn.left {
     padding-right: 20px;
     float: left;
     text-align: right;
 }
+
 .btn.right {
     padding-left: 20px;
     float: right;

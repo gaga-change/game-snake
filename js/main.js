@@ -11,9 +11,10 @@ var DirectionOld = null
 var DirectionNew = null
 /* 游戏状态 */
 var GameState = null
-var Scope = 0
+var Scope = null
 
 function init() {
+  Scope = 0
   var snakes = _initSnake() // 初始化蛇的坐标
   var fruits = []
   fruits.push(createFruit(snakes, fruits)) // 初始化水果坐标，默认是两个
@@ -269,7 +270,8 @@ function _padding() {
  * @private
  */
 function _h() {
-  return Math.floor(window.screen.height * 0.8)
+  // return Math.floor(window.screen.height * 0.8)
+  return Math.floor(document.body.scrollHeight  * 0.8)
 }
 
 /**
@@ -278,5 +280,5 @@ function _h() {
  * @private
  */
 function _w() {
-  return window.screen.width
+  return Math.min(window.screen.width, 768)
 }
