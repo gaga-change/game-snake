@@ -1,54 +1,67 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
+
 <head>
   <meta charset="UTF-8">
   <title>create.js</title>
   <link rel="stylesheet" href="css/stylesheet.css?v=2">
   <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+    content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
+
 <body>
-<div id="app">
-  <div class="content-canvas" id="content-canvas">
-  </div>
-  <div class="control">
-    <div class="row">
+  <div id="app">
+    <div class="content-canvas" id="content-canvas">
+    </div>
+    <div class="control">
+      <div class="row">
+        <div class="btn">
+          <button onclick="changeDirection(UP)">上</button>
+        </div>
+        <div class="scope">
+          分数：<span id="scope">0</span>
+        </div>
+        <div class="stop-game">
+          <button type="button" onclick="end()">结束</button>
+        </div>
+      </div>
+      <div class="row clearfix">
+        <div class="btn half-width left">
+          <button onclick="changeDirection(LEFT)">左</button>
+        </div>
+        <div class="btn half-width right">
+          <button onclick="changeDirection(RIGHT)">右</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="btn">
+          <button onclick="changeDirection(DOWN)">下</button>
+        </div>
+      </div>
+    </div>
+    <div class="menu" id="menu" style="display: block">
+      <h1>贪吃蛇</h1>
       <div class="btn">
-        <button onclick="changeDirection(UP)">上</button>
-      </div>
-      <div class="scope">
-        分数：<span id="scope">0</span>
-      </div>
-      <div class="stop-game">
-        <button type="button" onclick="end()">结束</button>
-      </div>
-    </div>
-    <div class="row clearfix">
-      <div class="btn half-width left">
-        <button onclick="changeDirection(LEFT)">左</button>
-      </div>
-      <div class="btn half-width right">
-        <button onclick="changeDirection(RIGHT)">右</button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="btn">
-        <button onclick="changeDirection(DOWN)">下</button>
+        <button type="button" onclick="start()">开始</button>
       </div>
     </div>
   </div>
-  <div class="menu" id="menu" style="display: block">
-    <h1>贪吃蛇</h1>
-    <div class="btn">
-      <button type="button" onclick="start()">开始</button>
-    </div>
-  </div>
-</div>
 </body>
 <script src="lib/easeljs-0.8.2.min.js?v=1"></script>
 <script src="js/pointClass.js?v=1"></script>
 <script src="js/main.js?v=2"></script>
 <script>
+  var id = null
+  window.onresize = function (e) {
+    clearTimeout(id)
+    id = setTimeout(reload, 1000)
+  }
+
+  function reload() {
+    id = null
+    alert('当前窗口大小发生调整，页面将刷新')
+    location.href = location.href
+  }
 
   function start() {
     document.getElementById('menu').style.display = 'none'
@@ -60,4 +73,5 @@
     document.getElementById('menu').style.display = 'block'
   }
 </script>
+
 </html>
