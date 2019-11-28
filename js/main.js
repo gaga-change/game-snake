@@ -63,10 +63,31 @@
         id = null
         swal('当前窗口大小发生调整，页面将刷新！', {
           button: { text: '确定' },
-        }).then((value) => {
+        }).then(function () {
           location.href = location.href
         })
       }, 1000)
+    })
+    // 监听上下左右按钮
+    $(window).keydown(function (e) {
+      switch (e.keyCode) {
+        case 37:
+          changeDirection(LEFT)
+          $('#LeftBtn').eq(0).focus()
+          break
+        case 38:
+          changeDirection(UP)
+          $('#UpBtn').eq(0).focus()
+          break
+        case 39:
+          changeDirection(RIGHT)
+          $('#RightBtn').eq(0).focus()
+          break
+        case 40:
+          changeDirection(DOWN)
+          $('#DownBtn').eq(0).focus()
+          break
+      }
     })
   }
 
