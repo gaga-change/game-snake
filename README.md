@@ -4,6 +4,8 @@
 
 demo地址：[https://gaga-change.github.io/game-snake/index.html](https://gaga-change.github.io/game-snake/index.html)（若打不开或报错提[iesues](https://github.com/gaga-change/game-snake/issues)我会立即修复，或是[PR](https://github.com/gaga-change/game-snake/pulls)）
 
+下载后用浏览器打开`index.html`即可运行！
+
 PC端&移动端适配，皆可玩耍！效果图如下：
 
 ![效果图](./logo.png)
