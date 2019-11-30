@@ -12,6 +12,7 @@ $(function () {
   var directionNext = null // 下一步移动方向
   var gameState = null // 游戏状态
   var scope = 0 // 分数
+  var maxScope = 0 // 最高分
 
   /**
  * 绘制格子地图
@@ -162,6 +163,13 @@ $(function () {
    */
   function end() {
     gameState = GAME_STATE_ENUM.END
+    var text = '当前分数：' + scope + '分'
+    if (scope > maxScope) {
+      text = '新记录！' + text
+    }
+    swal(text, {
+      button: { text: '确定' },
+    })
     renderHistory(scope)
     $('#MenuArea').show()
   }
@@ -291,6 +299,7 @@ $(function () {
       history = []
     }
     history = history || []
+    maxScope = history[0] || 0
     if (scope) {
       history.push(scope)
       history.sort(function (a, b) {
