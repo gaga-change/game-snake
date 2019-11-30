@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-cmn-Hans">
+<html lang="zh">
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>html5在线贪吃蛇小游戏</title>
-  <link rel="stylesheet" href="css/stylesheet.css?v=2">
   <link rel="shortcut icon" href="./img/favicon.ico" />
   <meta name="description" content="html5贪吃蛇小游戏，200行左右主逻辑代码，源码地址（https://github.com/gaga-change/game-snake）。" />
   <meta name="keywords" content="html5小游戏，h5小游戏，html5贪吃蛇小游戏，html贪吃蛇小游戏，在线贪吃蛇小游戏，html在线游戏" />
+  <link rel="stylesheet" href="css/stylesheet.css?v=3">
   <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+    content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
 </head>
 
 <body>
   <div id="app">
-    <div class="content-canvas" id="content-canvas">
+    <div class="content-canvas">
+      <canvas></canvas>
     </div>
     <div class="control">
       <div class="row">
@@ -44,15 +46,22 @@
     </div>
     <div class="menu" id="MenuArea" style="display: block">
       <h1>贪吃蛇</h1>
+      <div class="history">
+        <h5>历史记录</h5>
+        <div id="HistoryArea"></div>
+      </div>
       <div class="btn">
         <button id="StartBtn" type="button">开始</button>
       </div>
     </div>
   </div>
+  <!-- 引入createjs - easeljs包 -->
+  <script src="https://cdn.bootcss.com/EaselJS/1.0.2/easeljs.min.js"></script>
+  <!-- 载入jquery 方便dom操作 -->
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <!-- sweetalert 美化alert用的 -->
+  <script src="https://cdn.bootcss.com/sweetalert/2.1.2/sweetalert.min.js"></script>
+  <script src="js/main.js?v=4"></script>
 </body>
-<script src="https://cdn.bootcss.com/EaselJS/1.0.2/easeljs.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/sweetalert/2.1.2/sweetalert.min.js"></script>
-<script src="js/main.js?v=3"></script>
 
 </html>
